@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import apiKeys from "./apiKeys";
 import ReactAnimatedWeather from "react-animated-weather";
@@ -12,7 +12,8 @@ function Forcast(props) {
     axios
       .get(
         `${apiKeys.base}weather?q=${
-          city !== "[object Object]" ? city : query
+          // eslint-disable-next-line
+          city != "[object Object]" ? city : query
         }&units=metric&APPID=${apiKeys.key}`
       )
       .then((response) => {
@@ -26,16 +27,23 @@ function Forcast(props) {
         setError({ message: "Not Found", query: query });
       });
   };
-
+  // eslint-disable-next-line
+  function checkTime(i) {
+    if (i < 10) {
+      i = "0" + i;
+    } // add zero in front of numbers < 10
+    return i;
+  }
 
   const defaults = {
     color: "white",
     size: 112,
     animate: true,
   };
- 
+
   useEffect(() => {
-    search("Delhi");// eslint-disable-next-line
+    search("Delhi");
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -62,7 +70,7 @@ function Forcast(props) {
             {" "}
             <img
               src="https://images.avishkaar.cc/workflow/newhp/search-white.png"
-              onClick={search} alt="img"
+              onClick={search} alt=""
             />
           </div>
         </div>
@@ -77,7 +85,7 @@ function Forcast(props) {
                 <img
                   className="temp"
                   src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
-                  alt="img"
+                  alt=""
                 />
               </li>
               <li>
